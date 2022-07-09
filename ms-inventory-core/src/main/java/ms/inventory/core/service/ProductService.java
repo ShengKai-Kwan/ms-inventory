@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public ProductDTO insert(ProductDTO dto){
-        isNotNullAndEmpty(dto.getCode(), "code");
+//        isNotNullAndEmpty(dto.getCode(), "code");
         if(null != dto.getId() && repo.existsById(dto.getId()))
             throw new GenericErrorException(InventoryError.PRODUCT_RECORD_ALREADY_EXIST);
 
@@ -55,7 +55,7 @@ public class ProductService {
     }
 
     public ProductDTO update(ProductDTO dto){
-        isNotNullAndEmpty(dto.getCode(), "code");
+//        isNotNullAndEmpty(dto.getCode(), "code");
         if(null == dto.getId())
             throw new GenericErrorException(InventoryError.PRODUCT_ID_NULL);
         Product product = repo.findByIdAndStatus(dto.getId(), Status.ACTIVE)
@@ -83,7 +83,7 @@ public class ProductService {
     }
 
     private Product mapInputDataWithFoundRecord(Product input, Product foundRecord){
-        foundRecord.setCode(input.getCode());
+//        foundRecord.setCode(input.getCode());
         foundRecord.setName(input.getName());
         foundRecord.setQuantity(input.getQuantity());
         foundRecord.setUnitMeasurement(input.getUnitMeasurement());

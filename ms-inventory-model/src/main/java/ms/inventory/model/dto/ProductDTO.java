@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class ProductDTO extends BaseEntityDTO {
 
-    private String code;
+//    private String code;
     private String name;
     private int quantity;
     private String unitMeasurement;

@@ -17,8 +17,8 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Product extends BaseEntity {
 
-    @Column(name = "code", unique = true)
-    private String code;
+//    @Column(name = "code", unique = true)
+//    private String code;
 
     @Column(name = "name")
     private String name;

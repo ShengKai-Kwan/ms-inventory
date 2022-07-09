@@ -10,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 public class StockDTO extends BaseEntityDTO {
 
-    private String code;
+//    private String code;
     private String name;
     private String brand;
     private int quantity;
