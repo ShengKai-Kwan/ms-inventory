@@ -3,3 +3,4 @@ ms-inventory.iml
 ms-inventory-svc/.mvn
 ms-inventory-core/.mvn
 */.mvn
+docker/postgres-data

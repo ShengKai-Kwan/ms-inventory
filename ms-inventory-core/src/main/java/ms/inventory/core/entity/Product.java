@@ -1,6 +1,5 @@
 package ms.inventory.core.entity;
 
-import com.dev.core.lib.utility.core.converter.StatusConverter;
 import com.dev.core.lib.utility.core.model.entity.BaseEntity;
 import lombok.*;
 import ms.inventory.core.converter.UnitMeasurementConverter;
@@ -18,7 +17,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = true)
 public class Product extends BaseEntity {
 
-    @Column(name = "name")
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "name")

@@ -28,13 +28,13 @@ public class StockService {
     private ModelMapper mapper;
 
     public List<StockDTO> getAll(){
-        return repo.findAll().stream()
+        return repo.findAllByStatus(Status.ACTIVE).stream()
                 .map(record -> mapper.map(record, StockDTO.class))
                 .collect(Collectors.toList());
     }
 
     public StockDTO getById(UUID id){
-        Stock stock = repo.findById(id)
+        Stock stock = repo.findByIdAndStatus(id, Status.ACTIVE)
                 .orElseThrow(() -> new GenericErrorException(InventoryError.STOCK_RECORD_NOT_FOUND));
         return mapper.map(stock, StockDTO.class);
     }
@@ -50,10 +50,12 @@ public class StockService {
     }
 
     public StockDTO update(StockDTO dto){
-        if(null == dto.getId() || !repo.existsById(dto.getId()))
-            throw new GenericErrorException(InventoryError.STOCK_RECORD_NOT_FOUND);
-
-        Stock stock = mapper.map(dto, Stock.class);
+        if(null == dto.getId())
+            throw new GenericErrorException(InventoryError.STOCK_ID_NULL);
+        Stock stock = repo.findByIdAndStatus(dto.getId(), Status.ACTIVE)
+                .orElseThrow(() -> new GenericErrorException(InventoryError.STOCK_RECORD_NOT_FOUND));
+        Stock inputStock = mapper.map(dto, Stock.class);
+        stock = this.mapInputDataWithFoundRecord(inputStock, stock);
         return mapper.map(
                 repo.saveAndFlush(stock),
                 StockDTO.class);
@@ -68,10 +70,21 @@ public class StockService {
     }
 
     public void deleteById(UUID id){
-        repo.findById(id)
+        repo.findByIdAndStatus(id, Status.ACTIVE)
                 .ifPresent(record -> {
                     record.setStatus(Status.DELETED);
                     repo.saveAndFlush(record);
                 });
+    }
+
+    private Stock mapInputDataWithFoundRecord(Stock input, Stock foundRecord){
+        foundRecord.setCode(input.getCode());
+        foundRecord.setName(input.getName());
+        foundRecord.setBrand(input.getBrand());
+        foundRecord.setQuantity(input.getQuantity());
+        foundRecord.setUnitMeasurement(input.getUnitMeasurement());
+        foundRecord.setCost(input.getCost());
+
+        return foundRecord;
     }
 }

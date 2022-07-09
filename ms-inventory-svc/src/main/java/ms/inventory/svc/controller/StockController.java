@@ -17,22 +17,22 @@ public class StockController {
     @Autowired
     private StockHandler handler;
 
-    @GetMapping(value = ResourcePath.PRODUCT_GET_ALL)
+    @GetMapping(value = ResourcePath.STOCK_GET_ALL)
     public ResponseEntity<List<StockDTO>> getAll(){
         return ResponseEntity.ok(handler.getAll());
     }
 
-    @GetMapping(value = ResourcePath.PRODUCT_GET_BY_ID)
+    @GetMapping(value = ResourcePath.STOCK_GET_BY_ID)
     public ResponseEntity<StockDTO> getById(@PathVariable(value = "id") UUID id){
         return ResponseEntity.ok(handler.getById(id));
     }
 
-    @PostMapping(value = ResourcePath.PRODUCT_UPSERT)
+    @PostMapping(value = ResourcePath.STOCK_UPSERT)
     public ResponseEntity<StockDTO> upsert(@RequestBody StockDTO dto){
         return ResponseEntity.ok(handler.upsert(dto));
     }
 
-    @PostMapping(value = ResourcePath.PRODUCT_DELETE)
+    @PostMapping(value = ResourcePath.STOCK_DELETE)
     public ResponseEntity delete(@PathVariable(value = "id") UUID id){
         handler.deleteById(id);
         return ResponseEntity.ok().build();

@@ -20,10 +20,10 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = true)
 public class Stock extends BaseEntity {
 
-    @Column(name = "cd")
+    @Column(name = "code", unique = true)
     private String code;
 
-    @Column(name = "nm")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "brand")
