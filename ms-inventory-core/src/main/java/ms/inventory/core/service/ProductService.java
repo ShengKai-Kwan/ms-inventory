@@ -18,6 +18,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.dev.core.lib.utility.core.utils.Guard.isNotNullAndEmpty;
+
 @Service
 @AllArgsConstructor
 public class ProductService {
@@ -42,6 +44,7 @@ public class ProductService {
     }
 
     public ProductDTO insert(ProductDTO dto){
+        isNotNullAndEmpty(dto.getCode(), "code");
         if(null != dto.getId() && repo.existsById(dto.getId()))
             throw new GenericErrorException(InventoryError.PRODUCT_RECORD_ALREADY_EXIST);
 
@@ -52,6 +55,7 @@ public class ProductService {
     }
 
     public ProductDTO update(ProductDTO dto){
+        isNotNullAndEmpty(dto.getCode(), "code");
         if(null == dto.getId())
             throw new GenericErrorException(InventoryError.PRODUCT_ID_NULL);
         Product product = repo.findByIdAndStatus(dto.getId(), Status.ACTIVE)

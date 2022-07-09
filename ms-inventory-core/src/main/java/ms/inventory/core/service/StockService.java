@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.dev.core.lib.utility.core.utils.Guard.isNotNullAndEmpty;
+
 @Service
 @AllArgsConstructor
 public class StockService {
@@ -40,6 +42,7 @@ public class StockService {
     }
 
     public StockDTO insert(StockDTO dto){
+        isNotNullAndEmpty(dto.getCode(), "code");
         if(null != dto.getId() && repo.existsById(dto.getId()))
             throw new GenericErrorException(InventoryError.STOCK_RECORD_ALREADY_EXIST);
 
@@ -50,6 +53,7 @@ public class StockService {
     }
 
     public StockDTO update(StockDTO dto){
+        isNotNullAndEmpty(dto.getCode(), "code");
         if(null == dto.getId())
             throw new GenericErrorException(InventoryError.STOCK_ID_NULL);
         Stock stock = repo.findByIdAndStatus(dto.getId(), Status.ACTIVE)
