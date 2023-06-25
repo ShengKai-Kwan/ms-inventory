@@ -17,6 +17,7 @@
 	<modules>
 		<module>ms-inventory-core</module>
 		<module>ms-inventory-model</module>
+		<module>ms-inventory-svc</module>
 	</modules>
 	<properties>
 		<java.version>1.8</java.version>

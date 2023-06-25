@@ -19,15 +19,8 @@ import javax.persistence.Table;
 @Table(name = "t_stock")
 @EqualsAndHashCode(callSuper = true)
 public class Stock extends BaseEntity {
-
-    @Column(name = "code", unique = true)
-    private String code;
-
     @Column(name = "name")
     private String name;
-
-    @Column(name = "brand")
-    private String brand;
 
     @Column(name = "quantity")
     private int quantity;
@@ -38,4 +31,7 @@ public class Stock extends BaseEntity {
 
     @Column(name = "cost")
     private double cost;
+
+    @Column(name = "selling_price")
+    private double sellingPrice;
 }
